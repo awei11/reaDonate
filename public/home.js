@@ -1,32 +1,44 @@
-
-
 function homeClick() {
 
-	document.getElementById("clickDonate").href = "https://mail.google.com/mail/u/0/#inbox";
-  alert('executed');
+
+  chrome.tabs.executeScript(null, {
+    code: "document.body.innerText"
+  }, receiveText);
+
+}
+
+function receiveText(resultsArray) {
+  alert(resultsArray[0]);
+  let content = resultsArray[0];
+  //"wildfire, black, women"
+
+  // send info to api, get a url back.
+  const api_url = 'https://us-central1-smooth-brains-mask-evaluation.cloudfunctions.net/donationLink';
+  fetch(api_url, {
+    method: 'POST',
+    body: JSON.stringify({text:content}),
+    headers:{
+      'Content-Type': 'application/json'
+    } })
+    .then(data => {
+      alert(data[0]);
+      return data.json();
+    })
+    .then(res => {
+        alert(res[0]);
+      chrome.tabs.update({
+        url: res[0]
+      });
+    })
+    .catch(error => console.error('Error:', error));
 
 
-    // get all text
-    var allText = document.body.innerText;
-    console.log(allText);
-    // send info to api, get a url back.
-    const api_url = 'CLOUD_FUNCTION_URL';
-    fetch(api_url, {
-        method: 'POST',
-        body: JSON.stringify(allText),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      // convert json to JS object
-      .then(data => {
-        return data.json()
-      })
-      .then(res => {
-        document.getElementById("clickDonate").href = res.url;
-      })
-      .catch(error => console.error('Error:', error));
 
+
+  // update
+  // chrome.tabs.update({
+  //   url: "https://mail.google.com/mail/u/0/#inbox"
+  // });
 }
 
 document.getElementById('clickAnalyze').addEventListener('click', homeClick);
