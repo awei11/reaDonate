@@ -1,6 +1,5 @@
+/*global chrome*/
 function homeClick() {
-
-
   chrome.tabs.executeScript(null, {
     code: "document.body.innerText"
   }, receiveText);
