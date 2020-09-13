@@ -21,7 +21,6 @@ function content() {
         'Content-Type': 'application/json'
       } })
       .then(data => {
-        alert("Found the Perfect Match !");
         return data.json();
       })
       .then(res => {
