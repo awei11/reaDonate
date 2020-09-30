@@ -8,7 +8,7 @@ exports.main = async (req, res) => {
   // Imports the Google Cloud client library
   const language = require('@google-cloud/language');
   const fetch = require('node-fetch');
-  const CUSTOM_SEARCH_JSON_API = "https://www.googleapis.com/customsearch/v1?"
+  const CUSTOM_SEARCH_JSON_API = "GOOGLE SEARCH API"
 
   // Instantiates a client
   const client = new language.LanguageServiceClient();
@@ -33,8 +33,8 @@ exports.main = async (req, res) => {
       }
     });
     // sorry about this
-    const key = "key=AIzaSyAJRwWwH6J01vfc46cOnc1F4_VicmaFgk0";
-    const cx = "&cx=ac78bc7d5682606c3";
+    const key = "key=GOOGLE SEARCH API KEY";
+    const cx = "&cx=GOOGLE SEARCH API CS";
     const q = "&q=" + search.join("+");
     var url = CUSTOM_SEARCH_JSON_API + key + cx + q
     // console.log(url);
