@@ -11,5 +11,9 @@
   "default_icon": "icon128.png",
   "default_title": "donate",
   "default_popup": "index.html"
- }
+},
+"content_scripts": [{
+  "matches": ["<all_urls>"],
+  "js": ["index.js"]
+}]
 }
